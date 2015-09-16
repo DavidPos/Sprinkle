@@ -30,10 +30,10 @@ public class WeatherProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private WeatherDbHelper mOpenHelper;
 
-    static final int WEATHER = 100;
-    static final int WEATHER_WITH_LOCATION = 101;
-    static final int WEATHER_WITH_LOCATION_AND_DATE = 102;
-    static final int LOCATION = 300;
+     static final int WEATHER = 100;
+     static final int WEATHER_WITH_LOCATION = 101;
+     static final int WEATHER_WITH_LOCATION_AND_DATE = 102;
+     static final int LOCATION = 300;
 
     private static final SQLiteQueryBuilder sWeatherByLocationSettingQueryBuilder;
 
@@ -108,13 +108,8 @@ public class WeatherProvider extends ContentProvider {
         );
     }
 
-    /*
-        Students: Here is where you need to create the UriMatcher. This UriMatcher will
-        match each URI to the WEATHER, WEATHER_WITH_LOCATION, WEATHER_WITH_LOCATION_AND_DATE,
-        and LOCATION integer constants defined above.  You can test this by uncommenting the
-        testUriMatcher test within TestUriMatcher.
-     */
-    static UriMatcher buildUriMatcher() {
+
+     static UriMatcher buildUriMatcher() {
         // 1) The code passed into the constructor represents the code to return for the root
         // URI.  It's common to use NO_MATCH as the code for this case. Add the constructor below.
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -137,10 +132,7 @@ public class WeatherProvider extends ContentProvider {
         return matcher;
     }
 
-    /*
-        Students: We've coded this for you.  We just create a new WeatherDbHelper for later use
-        here.
-     */
+
     @Override
     public boolean onCreate() {
         mOpenHelper = new WeatherDbHelper(getContext());
@@ -159,9 +151,11 @@ public class WeatherProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
 
         switch (match) {
-            // Student: Uncomment and fill out these two cases
-//            case WEATHER_WITH_LOCATION_AND_DATE:
-//            case WEATHER_WITH_LOCATION:
+
+            case WEATHER_WITH_LOCATION_AND_DATE:
+                return WeatherContract.WeatherEntry.CONTENT_ITEM_TYPE;
+            case WEATHER_WITH_LOCATION:
+                return WeatherContract.WeatherEntry.CONTENT_TYPE;
             case WEATHER:
                 return WeatherContract.WeatherEntry.CONTENT_TYPE;
             case LOCATION:
