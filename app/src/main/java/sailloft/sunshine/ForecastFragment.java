@@ -132,11 +132,13 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         weatherTask.execute(location);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+    void onLocationChanged(){
         updateWeather();
+        getLoaderManager().restartLoader(FORECAST_LOADER, null, this);
+
     }
+
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
